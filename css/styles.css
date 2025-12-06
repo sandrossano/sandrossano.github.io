@@ -1,0 +1,343 @@
+/**
+ * ===================================================================
+ * Sandro Rossano Portfolio - Modern CSS
+ * Minimal, clean stylesheet without legacy code
+ * ===================================================================
+ */
+
+/* Import CSS Variables from main.css */
+@import url("main.css") layer(base);
+
+/* ===================================================================
+   01. CSS Reset & Base
+   =================================================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "lora-regular", Georgia, serif;
+  font-size: 1.7rem;
+  line-height: 1.75;
+  color: #6e6e6e;
+  background: var(--color-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-black);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-primary);
+  outline: 0;
+}
+
+/* ===================================================================
+   02. Typography
+   =================================================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "poppins-semibold", sans-serif;
+  color: var(--color-grey-dark);
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.4rem;
+}
+h4 {
+  font-size: 2rem;
+}
+h5 {
+  font-size: 1.8rem;
+}
+h6 {
+  font-size: 1.6rem;
+}
+
+p {
+  margin-bottom: 2rem;
+}
+
+/* ===================================================================
+   03. Grid System (Simple Flexbox)
+   =================================================================== */
+.row {
+  width: 94%;
+  /* max-width: 1170px; */
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+[class*="col-"] {
+  padding: 0 15px;
+}
+
+.col-twelve {
+  width: 100%;
+}
+.col-six {
+  width: 50%;
+}
+.col-four {
+  width: 33.333%;
+}
+.col-three {
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  .col-six,
+  .col-four,
+  .col-three {
+    width: 100%;
+  }
+}
+
+/* ===================================================================
+   04. Buttons
+   =================================================================== */
+.button,
+button,
+input[type="submit"],
+input[type="button"] {
+  display: inline-block;
+  font-family: "poppins-bold", sans-serif;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  height: 5.4rem;
+  line-height: 5.4rem;
+  padding: 0 3rem;
+  margin: 0 0.3rem 1.2rem 0;
+  background: var(--color-grey-lighter);
+  color: var(--color-grey-dark);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.button:hover,
+button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.button.stroke {
+  background: transparent;
+  border: 3px solid var(--color-grey-dark);
+  line-height: 4.8rem;
+}
+
+.button.button-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.button.button-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ===================================================================
+   05. Forms
+   =================================================================== */
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  font-family: "poppins-regular", sans-serif;
+  font-size: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  background: #f1f1f1;
+  border: 1px solid var(--color-grey-lighter);
+  border-radius: 3px;
+  color: var(--color-grey-dark);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* ===================================================================
+   06. Preloader
+   =================================================================== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #050505;
+  z-index: 9999;
+  height: 100vh;
+  width: 100%;
+  transition: opacity 0.3s ease;
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  border: 5px solid #f5f5f5;
+  border-top-color: var(--color-primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===================================================================
+   07. Utility Classes
+   =================================================================== */
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.hide {
+  display: none;
+}
+.full-width {
+  width: 100%;
+}
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ===================================================================
+   08. Sections
+   =================================================================== */
+section {
+  padding: 12rem 0;
+  position: relative;
+}
+
+.section-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-intro h1 {
+  font-family: "poppins-semibold", sans-serif;
+  font-size: 3.6rem;
+  color: var(--color-grey-dark);
+}
+
+.section-intro h5 {
+  font-family: "poppins-bold", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.875;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+}
+
+/* Passion Blog Link - Top Right */
+.passion-blog-link {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  z-index: 10;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.passion-blog-link:hover {
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+/* ===================================================================
+   09. Responsive
+   =================================================================== */
+@media (max-width: 1024px) {
+  html {
+    font-size: 9.41px;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 9rem 0;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .row {
+    width: 90%;
+  }
+}
