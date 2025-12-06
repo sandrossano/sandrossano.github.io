@@ -123,8 +123,27 @@
 	if (passionsCarousel) {
 		const items = passionsCarousel.querySelectorAll('.service');
 		const dotsContainer = document.querySelector('.carousel-dots');
-		const itemsPerView = 3;
-		const totalPages = Math.ceil(items.length / itemsPerView);
+		
+		// Determine items per view based on screen size
+		const getItemsPerView = () => {
+			const width = window.innerWidth;
+			if (width <= 768) return 1;
+			if (width <= 1024) return 2;
+			return 3;
+		};
+		
+		let itemsPerView = getItemsPerView();
+		let totalPages = Math.ceil(items.length / itemsPerView);
+		
+		// Update on resize
+		window.addEventListener('resize', () => {
+			const newItemsPerView = getItemsPerView();
+			if (newItemsPerView !== itemsPerView) {
+				itemsPerView = newItemsPerView;
+				totalPages = Math.ceil(items.length / itemsPerView);
+				updateDots();
+			}
+		});
 		
 		// Enable mouse drag scrolling
 		let isDown = false;
@@ -153,24 +172,33 @@
 			passionsCarousel.scrollLeft = scrollLeft - walk;
 		});
 		
-	// Create dots for pages (not individual items)
-	for (let i = 0; i < totalPages; i++) {
-		const dot = document.createElement('button');
-		dot.classList.add('carousel-dot');
-		dot.setAttribute('aria-label', `Vai alla pagina ${i + 1} di ${totalPages}`);
-		dot.setAttribute('type', 'button');
-		if (i === 0) {
-			dot.classList.add('active');
-			dot.setAttribute('aria-current', 'true');
+	// Create dots
+	const updateDots = () => {
+		dotsContainer.innerHTML = '';
+		totalPages = Math.ceil(items.length / itemsPerView);
+		
+		for (let i = 0; i < totalPages; i++) {
+			const dot = document.createElement('button');
+			dot.classList.add('carousel-dot');
+			dot.setAttribute('aria-label', `Vai alla pagina ${i + 1} di ${totalPages}`);
+			dot.setAttribute('type', 'button');
+			if (i === 0) {
+				dot.classList.add('active');
+				dot.setAttribute('aria-current', 'true');
+			}
+			dot.addEventListener('click', () => {
+				const itemIndex = i * itemsPerView;
+				if (items[itemIndex]) {
+					items[itemIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+				}
+			});
+			dotsContainer.appendChild(dot);
 		}
-		dot.addEventListener('click', () => {
-			const scrollPosition = passionsCarousel.scrollWidth / totalPages * i;
-			passionsCarousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-		});
-		dotsContainer.appendChild(dot);
-	}
+	};
+	
+	updateDots();
 
-	const dots = dotsContainer.querySelectorAll('.carousel-dot');
+	const getDots = () => dotsContainer.querySelectorAll('.carousel-dot');
 
 	// Update active dot on scroll
 	let scrollTimeout;
@@ -178,10 +206,10 @@
 		clearTimeout(scrollTimeout);
 		scrollTimeout = setTimeout(() => {
 			const scrollLeft = passionsCarousel.scrollLeft;
-			const pageWidth = passionsCarousel.scrollWidth / totalPages;
-			const currentPage = Math.round(scrollLeft / pageWidth);
+			const itemWidth = passionsCarousel.offsetWidth / itemsPerView;
+			const currentPage = Math.floor(scrollLeft / (itemWidth * itemsPerView));
 
-			dots.forEach((dot, index) => {
+			getDots().forEach((dot, index) => {
 				const isActive = index === currentPage;
 				dot.classList.toggle('active', isActive);
 				if (isActive) {
@@ -192,4 +220,6 @@
 			});
 		}, 100);
 	});
-}})();
+}
+
+})();

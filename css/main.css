@@ -443,6 +443,8 @@
   padding-top: 12rem;
   padding-bottom: 12rem;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
 #services .overlay {
@@ -504,7 +506,7 @@
 
 #passions-carousel {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -514,6 +516,10 @@
   gap: 0;
   padding-bottom: 2rem;
   cursor: grab;
+  will-change: scroll-position;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 #passions-carousel:active {
@@ -525,10 +531,16 @@
 }
 
 #passions-carousel .service {
-  flex: 0 0 calc(33.333% - 4rem);
-  scroll-snap-align: start;
-  min-width: 300px;
+  flex: 0 0 calc(33.333% - 2rem);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  min-width: 280px;
+  max-width: calc(33.333% - 2rem);
   user-select: none;
+  transform: translateZ(0);
+  will-change: transform;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .carousel-dots {
@@ -563,6 +575,24 @@
   font-size: 4.2rem;
   color: var(--color-primary);
   margin-bottom: 2.1rem;
+}
+
+/* Responsive: 2 items on tablet, 1 on mobile */
+@media (max-width: 1024px) {
+  #passions-carousel .service {
+    flex: 0 0 calc(50% - 2rem);
+    max-width: calc(50% - 2rem);
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  #passions-carousel .service {
+    flex: 0 0 100%;
+    max-width: 100%;
+    min-width: 100%;
+    padding: 0 5%;
+  }
 }
 
 .service .icon i {

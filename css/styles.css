@@ -22,6 +22,7 @@
 html {
   font-size: 62.5%; /* 1rem = 10px */
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -32,6 +33,9 @@ body {
   background: var(--color-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 img,
@@ -97,7 +101,7 @@ p {
    =================================================================== */
 .row {
   width: 94%;
-  /* max-width: 1170px; */
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -276,6 +280,8 @@ textarea:focus {
 section {
   padding: 12rem 0;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
 .section-intro {
