@@ -15,7 +15,7 @@ Web Developer Team Leader e Referente Tecnico AI con esperienza consolidata in a
 - **AI Integration**: AWS Bedrock (Claude, Meta Llama), Prompt Engineering
 
 ### Architettura Portfolio
-- ✅ **HTML5 Semantico** (441 righe) - Ottimizzato da 659 righe (-33%)
+- ✅ **HTML5 Semantico** 441 righe
 - ✅ **CSS Custom Properties** - Sistema di variabili per colori consistenti
 - ✅ **Zero jQuery** - Solo JavaScript vanilla ES6+ moderno
 - ✅ **Font Awesome 6 CDN** - Icone da Cloudflare CDN (no bloat in repo)
@@ -34,13 +34,10 @@ Web Developer Team Leader e Referente Tecnico AI con esperienza consolidata in a
 ├── css/
 │   ├── styles.css         # CSS base moderno con CSS Variables
 │   ├── main.css           # Stili componenti con Custom Properties
-│   ├── fonts.css          # Font custom (Lora, Poppins)
-│   ├── base.css           # Reset e normalizzazione
-│   └── vendor.css         # Vendor styles
+│   └── fonts.css          # Font custom (Lora, Poppins)
 ├── js/
 │   ├── main.js            # JavaScript vanilla ES6+ (carousel, stats, scroll)
-│   ├── pace.min.js        # Loading progress bar (~4KB)
-│   └── plugins.js         # Utility functions
+│   └── pace.min.js        # Loading progress bar (~4KB)
 ├── images/                # Immagini ottimizzate e assets
 │   ├── intro-bg.jpg       # Hero background
 │   ├── otaku.jpg          # Passions section background
@@ -49,7 +46,8 @@ Web Developer Team Leader e Referente Tecnico AI con esperienza consolidata in a
 ├── fonts/                 # Font personalizzati
 │   ├── lora/             # Font serif per body text
 │   └── poppins/          # Font sans-serif per headings
-└── sandro_rossano.pdf     # CV scaricabile
+└── files/
+    └── sandro_rossano.pdf     # CV scaricabile
 
 ```
 
