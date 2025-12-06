@@ -187,10 +187,8 @@
 				dot.setAttribute('aria-current', 'true');
 			}
 			dot.addEventListener('click', () => {
-				const itemIndex = i * itemsPerView;
-				if (items[itemIndex]) {
-					items[itemIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-				}
+				const scrollPosition = (passionsCarousel.scrollWidth / totalPages) * i;
+				passionsCarousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
 			});
 			dotsContainer.appendChild(dot);
 		}
@@ -206,8 +204,13 @@
 		clearTimeout(scrollTimeout);
 		scrollTimeout = setTimeout(() => {
 			const scrollLeft = passionsCarousel.scrollLeft;
-			const itemWidth = passionsCarousel.offsetWidth / itemsPerView;
-			const currentPage = Math.floor(scrollLeft / (itemWidth * itemsPerView));
+			const scrollWidth = passionsCarousel.scrollWidth;
+			const clientWidth = passionsCarousel.clientWidth;
+			const maxScroll = scrollWidth - clientWidth;
+			
+			// Calculate which page we're on
+			const scrollPerPage = maxScroll / (totalPages - 1 || 1);
+			const currentPage = Math.round(scrollLeft / scrollPerPage);
 
 			getDots().forEach((dot, index) => {
 				const isActive = index === currentPage;
